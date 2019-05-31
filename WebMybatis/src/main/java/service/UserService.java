@@ -14,6 +14,6 @@ public interface UserService {
 
     UserInfo getUserByUsername(String username);
 
-    List<UserInfo> getUsersByParams(Integer ageBegin,Integer ageEnd,Integer sex);
+    List<UserInfo> getUsersByParams(Integer ageBegin, Integer ageEnd, Integer sex);
 
 }

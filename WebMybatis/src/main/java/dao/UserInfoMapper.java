@@ -2,7 +2,9 @@ package dao;
 
 import domain.UserInfo;
 import domain.UserInfoExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface UserInfoMapper {

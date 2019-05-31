@@ -10,7 +10,7 @@ public class UserInfoController {
 
     public static void main(String[] args) {
 
-        UserServiceImpl userService=new UserServiceImpl();
+        UserServiceImpl userService = new UserServiceImpl();
 
 /*        for (int i=0;i<10;i++){
             UserInfo userInfo=new UserInfo();
@@ -29,8 +29,8 @@ public class UserInfoController {
             System.out.println(userInfo.getUserName());
         }*/
 
-UserInfo userInfo= userService.getUserByUsername("admin9");
-userInfo.setUserName("admin99");
-userService.updateUser(userInfo);
+        UserInfo userInfo = userService.getUserByUsername("admin9");
+        userInfo.setUserName("admin99");
+        userService.updateUser(userInfo);
     }
 }
