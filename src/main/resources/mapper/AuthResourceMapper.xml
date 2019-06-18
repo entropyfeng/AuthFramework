@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.entropyfeng.rubbishauth.dao.AuthResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.github.entropyfeng.rubbishauth.domain.po.DefaultAuthResource" >
+    <constructor >
+      <idArg column="resource_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="resource_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resource_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resource_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resource_status" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resource_desc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    resource_id, resource_name, resource_type, resource_content, resource_status, resource_desc, 
+    create_time, update_time
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from auth_resource
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from auth_resource
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.github.entropyfeng.rubbishauth.domain.po.DefaultAuthResource" >
+    insert into auth_resource (resource_id, resource_name, resource_type, 
+      resource_content, resource_status, resource_desc, 
+      create_time, update_time)
+    values (#{resourceId,jdbcType=INTEGER}, #{resourceName,jdbcType=VARCHAR}, #{resourceType,jdbcType=VARCHAR}, 
+      #{resourceContent,jdbcType=VARCHAR}, #{resourceStatus,jdbcType=VARCHAR}, #{resourceDesc,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="selectRolesAndResources" resultType="java.util.Map">
+    select auth_role.role_name, auth_resource.resource_type,auth_resource.resource_content from auth_role,auth_resource inner join auth_role_resource on auth_resource.resource_id=auth_role_resource.resource_id where resource_status="ENABLE" and auth_role.role_id=auth_role_resource.role_id
+  </select>
+
+</mapper>

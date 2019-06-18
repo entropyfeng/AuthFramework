@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.entropyfeng.rubbishauth.dao.AuthRoleMapper">
+  <resultMap id="BaseResultMap" type="com.github.entropyfeng.rubbishauth.domain.po.DefaultAuthRole">
+    <constructor>
+      <idArg column="role_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="role_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="role_status" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="role_desc" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    role_id, role_name, role_status, role_desc, update_time, create_time
+  </sql>
+   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from auth_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from auth_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.github.entropyfeng.rubbishauth.domain.po.DefaultAuthRole">
+    insert into auth_role (role_id, role_name, role_status, 
+      role_desc, update_time, create_time
+      )
+    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleStatus,jdbcType=VARCHAR}, 
+      #{roleDesc,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+<select id="selectContainRoles" resultType="List">
+  select auth_role.role_name from auth_role ,auth_user_role where auth_user_role.user_id=#{userId} and auth_role.role_id= auth_user_role.role_id
+</select>
+</mapper>
