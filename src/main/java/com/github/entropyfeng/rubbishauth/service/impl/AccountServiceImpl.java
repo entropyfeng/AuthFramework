@@ -1,11 +1,17 @@
 package com.github.entropyfeng.rubbishauth.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.github.entropyfeng.begauth.config.AuthProperties;
 import com.github.entropyfeng.begauth.data.po.BaseAuthUser;
 import com.github.entropyfeng.begauth.data.to.RoleAndResource;
+import com.github.entropyfeng.begauth.util.CommonUtil;
+import com.github.entropyfeng.begauth.util.JsonWebTokenUtil;
 import com.github.entropyfeng.rubbishauth.dao.AuthResourceMapper;
 import com.github.entropyfeng.rubbishauth.dao.AuthRoleMapper;
 import com.github.entropyfeng.rubbishauth.dao.AuthUserMapper;
+import com.github.entropyfeng.rubbishauth.exception.PasswordErrorException;
 import com.github.entropyfeng.rubbishauth.service.AccountService;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,20 +62,24 @@ public class AccountServiceImpl implements AccountService {
                 RoleAndResource roleAndResource = new RoleAndResource();
                 roleAndResource.addEntity(resourceContent, resourceType);
                 roleAndResource.setRoleName(roleName);
-                res.put(roleName,roleAndResource);
+                res.put(roleName, roleAndResource);
             }
         });
         return new ArrayList<>(res.values());
     }
 
     @Override
-    public String loginByUserId(@NotNull String userId, @NotNull String password) {
+    public String loginByUserId(@NotNull String userId, @NotNull String password)throws PasswordErrorException {
 
 
-       BaseAuthUser authUser= authUserMapper.selectAuthUserByUserId(userId);
-       if(authUser.getPassword().equals(password) ){
-
-       }
-        return null;
+        String res=null;
+        BaseAuthUser authUser = authUserMapper.selectAuthUserByUserId(userId);
+        if (authUser!=null&&password.equals(authUser.getPassword())) {
+            List<String> roles = authRoleMapper.selectContainRoles(userId);
+            res= JsonWebTokenUtil.issueJWT(AuthProperties.jwtSecretKey, JsonWebTokenUtil.generatorJsonWebTokenId(), userId, "auth_server", "web", 60 * 60 * 60L, JSON.toJSONString(roles), "", SignatureAlgorithm.HS512);
+        }else {
+            throw new PasswordErrorException();
+        }
+        return res;
     }
 }

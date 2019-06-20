@@ -35,7 +35,7 @@ public interface AuthRoleMapper {
     DefaultAuthRole selectByPrimaryKey(Integer roleId);
 
 
-    List selectContainRoles(Integer userId);
+    List<String> selectContainRoles(String userId);
 
 
 }

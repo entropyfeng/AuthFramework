@@ -28,6 +28,9 @@ public class RBACTest {
 
     @Test
     public void test(){
-        List dd=authRoleMapper.selectContainRoles()
+
+      List list=  authRoleMapper.selectContainRoles("user1111");
+
+        list.get(0);
     }
 }

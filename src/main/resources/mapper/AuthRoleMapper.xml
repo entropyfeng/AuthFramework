@@ -35,7 +35,7 @@
       )
   </insert>
 
-<select id="selectContainRoles" resultType="List">
+<select id="selectContainRoles" resultType="java.lang.String">
   select auth_role.role_name from auth_role ,auth_user_role where auth_user_role.user_id=#{userId} and auth_role.role_id= auth_user_role.role_id
 </select>
 </mapper>

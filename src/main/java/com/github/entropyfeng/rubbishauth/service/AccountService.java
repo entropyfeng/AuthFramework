@@ -3,6 +3,7 @@ package com.github.entropyfeng.rubbishauth.service;
 
 
 import com.github.entropyfeng.begauth.data.to.RoleAndResource;
+import com.github.entropyfeng.rubbishauth.exception.PasswordErrorException;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,6 @@ public interface AccountService {
      */
     public ArrayList<RoleAndResource> loadRolesAndResources();
 
-    public String loginByUserId(String userId,String password);
+    public String loginByUserId(String userId,String password)throws PasswordErrorException;
 
 }
