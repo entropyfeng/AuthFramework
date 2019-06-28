@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.github.entropyfeng.rubbishauth.dao.AuthResourceMapper" >
-  <resultMap id="BaseResultMap" type="com.github.entropyfeng.rubbishauth.domain.po.DefaultAuthResource" >
+<mapper namespace="com.github.entropyfeng.manage.dao.AuthResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.github.entropyfeng.manage.domain.po.DefaultAuthResource" >
     <constructor >
       <idArg column="resource_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="resource_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -31,7 +31,7 @@
     where resource_id = #{resourceId,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.github.entropyfeng.rubbishauth.domain.po.DefaultAuthResource" >
+  <insert id="insert" parameterType="com.github.entropyfeng.manage.domain.po.DefaultAuthResource" >
     insert into auth_resource (resource_id, resource_name, resource_type, 
       resource_content, resource_status, resource_desc, 
       create_time, update_time)

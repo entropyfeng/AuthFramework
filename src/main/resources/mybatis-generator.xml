@@ -28,7 +28,7 @@
             targetPackage     指定生成的model生成所在的包名
             targetProject     指定在该项目下所在的路径
         -->
-        <javaModelGenerator targetPackage="com.github.entropyfeng.rubbishauth.domain.po" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.github.entropyfeng.manage.domain.po" targetProject="src/main/java">
             <!-- 是否对model添加 构造函数 -->
             <property name="constructorBased" value="true"/>
             <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
@@ -48,7 +48,7 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator targetPackage="com.github.entropyfeng.rubbishauth.dao" targetProject="src/main/java"
+        <javaClientGenerator targetPackage="com.github.entropyfeng.manage.dao" targetProject="src/main/java"
                              type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>

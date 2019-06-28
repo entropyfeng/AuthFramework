@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Teams SYSTEM "Teams.dtd" >
+<Teams>
+    <Team>
+        <TeamName>虚鲲</TeamName>
+        <Country>China</Country>
+        <Member Age="6666" Address="北京">蔡徐坤</Member>
+        <Member Age="6555" Address="南极">虚鲲二号</Member>
+    </Team>
+    <Team>
+        <TeamName>群主</TeamName>
+        <Country>Japan</Country>
+        <Member   Address="北京" Age="111">戒毒</Member>
+        <Member Age="1111" Address="ds">戒赌</Member>
+        <Member Age="14" Address="dre">暴躁老哥</Member>
+    </Team>
+</Teams>

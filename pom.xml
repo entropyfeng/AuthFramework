@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.entropyfeng</groupId>
-    <artifactId>rubbish-auth</artifactId>
+    <artifactId>manage</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>rubbish-auth</name>
+    <name>student-manage</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

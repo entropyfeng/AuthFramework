@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.github.entropyfeng.rubbishauth.dao.AuthUserMapper" >
-  <resultMap id="BaseResultMap" type="com.github.entropyfeng.rubbishauth.domain.po.DefaultAuthUser">
+<mapper namespace="com.github.entropyfeng.manage.dao.AuthUserMapper" >
+  <resultMap id="BaseResultMap" type="com.github.entropyfeng.manage.domain.po.DefaultAuthUser">
       <constructor>
           <idArg column="user_id"  jdbcType="VARCHAR" javaType="java.lang.String" />
           <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -18,7 +18,7 @@
         user_id,username,password,salt,email,phone,user_status,create_time,update_time
     </sql>
 
-    <insert id="insert" parameterType="com.github.entropyfeng.rubbishauth.domain.po.DefaultAuthUser">
+    <insert id="insert" parameterType="com.github.entropyfeng.manage.domain.po.DefaultAuthUser">
         insert into auth_user(
         <include refid="BASE_COLUMN_LIST"/>
         )
@@ -27,23 +27,23 @@
     </insert>
 
 
-    <select id="selectAuthUserByUserId" resultType="com.github.entropyfeng.rubbishauth.domain.po.DefaultAuthUser">
+    <select id="selectAuthUserByUserId" resultType="com.github.entropyfeng.manage.domain.po.DefaultAuthUser">
         select *
         from auth_user where user_id=#{userId};
 
     </select>
 
-    <select id="selectAuthUserByUsername" resultType="com.github.entropyfeng.rubbishauth.domain.po.DefaultAuthUser">
+    <select id="selectAuthUserByUsername" resultType="com.github.entropyfeng.manage.domain.po.DefaultAuthUser">
         select *
         from auth_user where username=#{username};
 
     </select>
-    <select id="selectAuthUserByEmail" resultType="com.github.entropyfeng.rubbishauth.domain.po.DefaultAuthUser">
+    <select id="selectAuthUserByEmail" resultType="com.github.entropyfeng.manage.domain.po.DefaultAuthUser">
         select *
         from auth_user where email=#{email};
 
     </select>
-    <select id="selectAuthUserByPhone" resultType="com.github.entropyfeng.rubbishauth.domain.po.DefaultAuthUser">
+    <select id="selectAuthUserByPhone" resultType="com.github.entropyfeng.manage.domain.po.DefaultAuthUser">
         select *
         from auth_user where phone=#{phone};
     </select>
