@@ -1,10 +1,10 @@
 package com.github.entropyfeng.manage.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.github.entropyfeng.begauth.data.vo.Message;
 import com.github.entropyfeng.manage.domain.po.Student;
 import com.github.entropyfeng.manage.domain.vo.StudentView;
 import com.github.entropyfeng.manage.service.StudentService;
+import com.github.entropyfeng.simpleauth.data.vo.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;

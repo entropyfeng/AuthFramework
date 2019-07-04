@@ -1,6 +1,6 @@
 package com.github.entropyfeng.manage.dao;
 
-import com.github.entropyfeng.manage.domain.po.DefaultAuthResource;
+import com.github.entropyfeng.manage.domain.po.AuthResource;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -27,7 +27,7 @@ public interface AuthResourceMapper {
      * @param record 资源
      * @return 受影响行数
      */
-    int insert(DefaultAuthResource record);
+    int insert(AuthResource record);
 
 
     /**
@@ -35,7 +35,7 @@ public interface AuthResourceMapper {
      * @param resourceId 资源id
      * @return 受影响行数
      */
-    DefaultAuthResource selectByPrimaryKey(Integer resourceId);
+    AuthResource selectByPrimaryKey(Integer resourceId);
 
 
     @MapKey("role_name")

@@ -1,6 +1,6 @@
 package com.github.entropyfeng.manage.dao;
 
-import com.github.entropyfeng.manage.domain.po.DefaultAuthRole;
+import com.github.entropyfeng.manage.domain.po.AuthRole;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 /**
@@ -22,7 +22,7 @@ public interface AuthRoleMapper {
      * @param record 角色
      * @return 影响数据
      */
-    int insert(DefaultAuthRole record);
+    int insert(AuthRole record);
 
 
 
@@ -32,10 +32,11 @@ public interface AuthRoleMapper {
      * @param roleId 角色id
      * @return role
      */
-    DefaultAuthRole selectByPrimaryKey(Integer roleId);
+    AuthRole selectByPrimaryKey(Integer roleId);
 
 
-    List<String> selectContainRoles(String userId);
+
+    List<String> selectContainRoles(Long userId);
 
 
 }

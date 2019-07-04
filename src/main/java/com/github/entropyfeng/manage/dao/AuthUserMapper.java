@@ -1,28 +1,29 @@
 package com.github.entropyfeng.manage.dao;
 
-import com.github.entropyfeng.manage.domain.po.DefaultAuthUser;
+import com.github.entropyfeng.manage.domain.po.AuthUser;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface AuthUserMapper {
 
 
-    int insert(DefaultAuthUser authUser);
+    int insert(AuthUser authUser);
 
-    DefaultAuthUser selectAuthUserByUserId(String userId);
+    Long selectUidByPhone(String phone);
 
-    DefaultAuthUser selectAuthUserByUsername(String username);
+    Long selectUidByEmail(String email);
 
-    DefaultAuthUser selectAuthUserByPhone(String phone);
+    Long selectUidByUsername(String username);
+    AuthUser selectAuthUserByUserId(Long userId);
+
+    AuthUser selectAuthUserByUsername(String username);
+
+    AuthUser selectAuthUserByPhone(String phone);
 
 
-    DefaultAuthUser selectAuthUserByEmail(String email);
+    AuthUser selectAuthUserByEmail(String email);
 
-    String selectUidByPhone(String phone);
 
-    String selectUidByEmail(String email);
-
-    String selectUidByUsername(String username);
 
 
 }
