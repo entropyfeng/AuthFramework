@@ -1,22 +1,21 @@
 package com.github.entropyfeng.manage.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.github.entropyfeng.begauth.config.AuthProperties;
-import com.github.entropyfeng.begauth.data.po.BaseAuthUser;
-import com.github.entropyfeng.begauth.data.to.RoleAndResource;
-import com.github.entropyfeng.begauth.util.JsonWebTokenUtil;
 import com.github.entropyfeng.manage.dao.AuthResourceMapper;
 import com.github.entropyfeng.manage.dao.AuthRoleMapper;
 import com.github.entropyfeng.manage.dao.AuthUserMapper;
-import com.github.entropyfeng.manage.exception.PasswordErrorException;
+import com.github.entropyfeng.manage.domain.po.AuthUser;
 import com.github.entropyfeng.manage.service.AccountService;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.github.entropyfeng.simpleauth.data.to.RoleAndResource;
+import com.github.entropyfeng.simpleauth.exception.AccountNotExistException;
+import com.github.entropyfeng.simpleauth.exception.PasswordErrorException;
+import com.github.entropyfeng.simpleauth.service.AuthService;
+import com.github.entropyfeng.simpleauth.util.SnowFlakeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotNull;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,15 +31,18 @@ public class AccountServiceImpl implements AccountService {
     private static final Logger logger = LoggerFactory.getLogger(AccountService.class);
 
     @Autowired
-    public AccountServiceImpl(AuthUserMapper authUserMapper, AuthRoleMapper authRoleMapper, AuthResourceMapper authResourceMapper) {
+    public AccountServiceImpl(@SuppressWarnings("all") AuthService authService, AuthUserMapper authUserMapper, AuthRoleMapper authRoleMapper, AuthResourceMapper authResourceMapper) {
         this.authUserMapper = authUserMapper;
         this.authRoleMapper = authRoleMapper;
         this.authResourceMapper = authResourceMapper;
+        this.authService = authService;
+
     }
 
     private AuthUserMapper authUserMapper;
     private AuthRoleMapper authRoleMapper;
     private AuthResourceMapper authResourceMapper;
+    private AuthService authService;
 
 
     @Override
@@ -48,7 +50,7 @@ public class AccountServiceImpl implements AccountService {
 
         List<Map<String, Object>> mapList = authResourceMapper.selectRolesAndResources();
 
-        Map<String, RoleAndResource> res = new HashMap<>();
+        Map<String, RoleAndResource> res = new HashMap<>(10);
 
         mapList.forEach(stringObjectMap -> {
             String roleName = (String) stringObjectMap.get("role_name");
@@ -68,17 +70,26 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public String loginByUserId(@NotNull String userId, @NotNull String password)throws PasswordErrorException {
+    public String loginByUsername(String username, String password) throws PasswordErrorException, AccountNotExistException {
 
+        Long userId = authUserMapper.selectUidByUsername(username);
 
-        String res=null;
-        BaseAuthUser authUser = authUserMapper.selectAuthUserByUserId(userId);
-        if (authUser!=null&&password.equals(authUser.getPassword())) {
-            List<String> roles = authRoleMapper.selectContainRoles(userId);
-            res= JsonWebTokenUtil.issueJWT(AuthProperties.jwtSecretKey, JsonWebTokenUtil.generatorJsonWebTokenId(), userId, "auth_server", "web", 60 * 60 * 60L, JSON.toJSONString(roles), "", SignatureAlgorithm.HS512);
-        }else {
-            throw new PasswordErrorException();
+        if (userId != null) {
+            return authService.login(userId, password);
         }
-        return res;
+        return null;
     }
+
+    @Override
+    public boolean registerByUsername(String username, String password) {
+
+        AuthUser authUser = new AuthUser();
+        authUser.setUserId(SnowFlakeUtil.getInstance().nextId());
+        authUser.setPassword(password);
+        authUser.setUsername(username);
+
+        return  1==authUserMapper.insert(authUser);
+    }
+
+
 }

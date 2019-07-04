@@ -2,8 +2,9 @@ package com.github.entropyfeng.manage.service;
 
 
 
-import com.github.entropyfeng.begauth.data.to.RoleAndResource;
-import com.github.entropyfeng.manage.exception.PasswordErrorException;
+import com.github.entropyfeng.simpleauth.data.to.RoleAndResource;
+import com.github.entropyfeng.simpleauth.exception.AccountNotExistException;
+import com.github.entropyfeng.simpleauth.exception.PasswordErrorException;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,8 @@ public interface AccountService {
      */
     public ArrayList<RoleAndResource> loadRolesAndResources();
 
-    public String loginByUserId(String userId,String password)throws PasswordErrorException;
 
+    public String loginByUsername(String username,String password)throws PasswordErrorException,AccountNotExistException;
+
+    public boolean registerByUsername(String username,String password);
 }

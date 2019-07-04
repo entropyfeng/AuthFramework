@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.entropyfeng.manage.dao.AuthRoleMapper">
-  <resultMap id="BaseResultMap" type="com.github.entropyfeng.manage.domain.po.DefaultAuthRole">
+  <resultMap id="BaseResultMap" type="com.github.entropyfeng.manage.domain.po.AuthRole">
     <constructor>
       <idArg column="role_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="role_name" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -26,7 +26,7 @@
     where role_id = #{roleId,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.github.entropyfeng.manage.domain.po.DefaultAuthRole">
+  <insert id="insert" parameterType="com.github.entropyfeng.manage.domain.po.AuthRole">
     insert into auth_role (role_id, role_name, role_status, 
       role_desc, update_time, create_time
       )
@@ -35,7 +35,7 @@
       )
   </insert>
 
-<select id="selectContainRoles" resultType="java.lang.String">
-  select auth_role.role_name from auth_role ,auth_user_role where auth_user_role.user_id=#{userId} and auth_role.role_id= auth_user_role.role_id
-</select>
+  <select id="selectContainRoles" resultType="java.lang.String">
+    select auth_role.role_name from auth_role ,auth_user_role where auth_user_role.user_id=#{userId} and auth_role.role_id= auth_user_role.role_id
+  </select>
 </mapper>

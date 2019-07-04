@@ -1,9 +1,9 @@
 package com.github.entropyfeng.manage.listener;
 
-import com.github.entropyfeng.begauth.config.AuthProperties;
-import com.github.entropyfeng.begauth.data.to.RoleAndResource;
-import com.github.entropyfeng.begauth.event.LoadAuthDomainEvent;
 import com.github.entropyfeng.manage.service.AccountService;
+import com.github.entropyfeng.simpleauth.config.AuthProperties;
+import com.github.entropyfeng.simpleauth.data.to.RoleAndResource;
+import com.github.entropyfeng.simpleauth.event.LoadAuthDomainEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,6 @@ public class LoadAuthDomainListener {
             arrayList.toArray(perms);
             redisTemplate.opsForSet().add(AuthProperties.authRoleSuffix + roleAndResource.getRoleName(), perms);
         });
-
 
         logger.info("after load role and resources ");
     }
