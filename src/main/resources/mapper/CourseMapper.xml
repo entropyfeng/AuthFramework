@@ -164,10 +164,11 @@
     where course_id = #{courseId,jdbcType=INTEGER}
   </update>
 
-  <select id="getCourseNames" resultType="String">
+  <select id="getCourseNames" resultType="java.lang.String">
     select course.course_name from course;
   </select>
-  <select id="getStudentContainCourseNames" resultType="String">
+
+  <select id="getStudentContainCourseNames" resultType="java.lang.String">
     select course.course_name from course,grade where grade.student_id=#{studentId} and grade.course_id=course.course_id
   </select>
 </mapper>

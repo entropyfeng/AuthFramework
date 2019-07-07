@@ -2,7 +2,6 @@ package com.github.entropyfeng.manage.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.github.entropyfeng.manage.service.AccountService;
-import com.github.entropyfeng.simpleauth.config.anno.GetAuth;
 import com.github.entropyfeng.simpleauth.data.vo.Message;
 import com.github.entropyfeng.simpleauth.exception.AccountNotExistException;
 import com.github.entropyfeng.simpleauth.exception.PasswordErrorException;

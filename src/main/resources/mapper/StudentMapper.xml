@@ -180,7 +180,7 @@
       student_class_name = #{studentClassName,jdbcType=VARCHAR}
     where student_id = #{studentId,jdbcType=VARCHAR}
   </update>
-  <select id="selectStudentGrade" parameterType="String" resultType="Map">
+  <select id="selectStudentGrade" parameterType="String" resultType="java.util.Map">
     select course.course_name,grade.grade from course inner join grade on course.course_id=grade.course_id where student_id=#{studentId}
   </select>
 </mapper>

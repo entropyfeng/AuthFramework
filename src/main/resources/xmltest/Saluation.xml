@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Salutation xmlns="http://www.github.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.github.com  http://www.github.com/SchemaTest.xsd"
+>
+    Hello World
+</Salutation>
